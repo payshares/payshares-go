@@ -1,8 +1,8 @@
 package build
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/xdr"
 )
 
 // ClearData removes a key/value pair associated with the source account

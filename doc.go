@@ -1,1 +1,1 @@
-package stellargo
+package paysharesgo

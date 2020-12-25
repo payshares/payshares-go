@@ -1,4 +1,4 @@
-package stellargo
+package paysharesgo
 
 import (
 	"bytes"
@@ -7,10 +7,10 @@ import (
 	"log"
 	"strings"
 
-	b "github.com/stellar/go/build"
-	"github.com/stellar/go/hash"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/xdr"
+	b "github.com/payshares/go/build"
+	"github.com/payshares/go/hash"
+	"github.com/payshares/go/keypair"
+	"github.com/payshares/go/xdr"
 )
 
 // ExampleDecodeTransaction shows the lowest-level process to decode a base64
@@ -60,7 +60,7 @@ func ExampleBuildTransaction() {
 }
 
 // ExampleLowLevelTransaction creates and signs a simple transaction, and then
-// encodes it into a hex string capable of being submitted to stellar-core.
+// encodes it into a hex string capable of being submitted to payshares-core.
 //
 // It uses the low-level xdr facilities to create the transaction.
 func ExampleLowLevelTransaction() {

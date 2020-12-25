@@ -9,13 +9,13 @@ import (
 
 	"github.com/rs/cors"
 	"github.com/spf13/cobra"
-	complianceHandler "github.com/stellar/go/handlers/compliance"
-	complianceProtocol "github.com/stellar/go/protocols/compliance"
-	"github.com/stellar/go/support/app"
-	"github.com/stellar/go/support/config"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/http"
-	"github.com/stellar/go/support/log"
+	complianceHandler "github.com/payshares/go/handlers/compliance"
+	complianceProtocol "github.com/payshares/go/protocols/compliance"
+	"github.com/payshares/go/support/app"
+	"github.com/payshares/go/support/config"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/support/http"
+	"github.com/payshares/go/support/log"
 )
 
 // Config represents the configuration of a federation server
@@ -25,7 +25,7 @@ type Config struct {
 	NeedsAuth         bool   `valid:"required" toml:"needs_auth"`
 	NetworkPassphrase string `valid:"required" toml:"network_passphrase"`
 	Keys              struct {
-		SigningSeed string `valid:"stellar_seed,required" toml:"signing_seed"`
+		SigningSeed string `valid:"payshares_seed,required" toml:"signing_seed"`
 	} `valid:"required"`
 	Callbacks struct {
 		Sanctions   string `valid:"url,optional" toml:"sanctions"`
@@ -41,7 +41,7 @@ type Config struct {
 func main() {
 	rootCmd := &cobra.Command{
 		Use:   "compliance",
-		Short: "stellar compliance server",
+		Short: "payshares compliance server",
 		Long:  "",
 		Run:   run,
 	}

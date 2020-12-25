@@ -43,7 +43,7 @@ func New(message string) error {
 // specifying a non-nil `r` will include information in the report about the
 // current http request.
 func ReportToSentry(err error, r *http.Request) {
-	st := raven.NewStacktrace(4, 3, []string{"github.org/stellar"})
+	st := raven.NewStacktrace(4, 3, []string{"github.org/payshares"})
 	exc := raven.NewException(err, st)
 
 	var packet *raven.Packet

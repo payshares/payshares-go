@@ -5,9 +5,9 @@ import (
 	"errors"
 	"io"
 
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/network"
+	"github.com/payshares/go/psrkey"
+	"github.com/payshares/go/xdr"
 )
 
 var (
@@ -73,16 +73,16 @@ func Master(networkPassphrase string) KP {
 // an address, or a seed.  If the provided input is a seed, the resulting KP
 // will have signing capabilities.
 func Parse(addressOrSeed string) (KP, error) {
-	_, err := strkey.Decode(strkey.VersionByteAccountID, addressOrSeed)
+	_, err := psrkey.Decode(psrkey.VersionByteAccountID, addressOrSeed)
 	if err == nil {
 		return &FromAddress{addressOrSeed}, nil
 	}
 
-	if err != strkey.ErrInvalidVersionByte {
+	if err != psrkey.ErrInvalidVersionByte {
 		return nil, err
 	}
 
-	_, err = strkey.Decode(strkey.VersionByteSeed, addressOrSeed)
+	_, err = psrkey.Decode(psrkey.VersionByteSeed, addressOrSeed)
 	if err == nil {
 		return &Full{addressOrSeed}, nil
 	}
@@ -92,7 +92,7 @@ func Parse(addressOrSeed string) (KP, error) {
 
 // FromRawSeed creates a new keypair from the provided raw ED25519 seed:w
 func FromRawSeed(rawSeed [32]byte) (*Full, error) {
-	seed, err := strkey.Encode(strkey.VersionByteSeed, rawSeed[:])
+	seed, err := psrkey.Encode(psrkey.VersionByteSeed, rawSeed[:])
 	if err != nil {
 		return nil, err
 	}

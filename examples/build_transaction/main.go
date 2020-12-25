@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	b "github.com/stellar/go/build"
-	"github.com/stellar/go/clients/horizon"
+	b "github.com/payshares/go/build"
+	"github.com/payshares/go/clients/horizon"
 )
 
 func main() {

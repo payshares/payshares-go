@@ -9,12 +9,12 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/xdr"
 	"golang.org/x/net/context"
 )
 
-// HomeDomainForAccount returns the home domain for the provided strkey-encoded
+// HomeDomainForAccount returns the home domain for the provided psrkey-encoded
 // account id.
 func (c *Client) HomeDomainForAccount(aid string) (string, error) {
 	a, err := c.LoadAccount(aid)

@@ -22,8 +22,8 @@ type AuthRequest struct {
 
 // AuthData represents how AuthRequest.Data field looks like.
 type AuthData struct {
-	// The stellar address of the customer that is initiating the send.
-	Sender string `json:"sender" valid:"required,stellar_address"`
+	// The payshares address of the customer that is initiating the send.
+	Sender string `json:"sender" valid:"required,payshares_address"`
 	// If the caller needs the recipient's AML info in order to send the payment.
 	NeedInfo bool `json:"need_info" valid:"-"`
 	// The transaction that the sender would like to send in XDR format. This transaction is unsigned.
@@ -38,21 +38,21 @@ type AuthResponse struct {
 	InfoStatus AuthStatus `json:"info_status"`
 	// If this FI is willing to accept this transaction. {ok, denied, pending}
 	TxStatus AuthStatus `json:"tx_status"`
-	// (only present if info_status is ok) JSON of the recipient's AML information. in the Stellar attachment convention
+	// (only present if info_status is ok) JSON of the recipient's AML information. in the Payshares attachment convention
 	DestInfo string `json:"dest_info,omitempty"`
 	// (only present if info_status or tx_status is pending) Estimated number of seconds till the sender can check back for a change in status. The sender should just resubmit this request after the given number of seconds.
 	Pending int `json:"pending,omitempty"`
 }
 
 // Attachment represents preimage object of compliance protocol in
-// Stellar attachment convention
+// Payshares attachment convention
 type Attachment struct {
 	Nonce       string `json:"nonce"`
 	Transaction `json:"transaction"`
 	Operations  []Operation `json:"operations"`
 }
 
-// Transaction represents transaction field in Stellar attachment
+// Transaction represents transaction field in Payshares attachment
 type Transaction struct {
 	SenderInfo map[string]string `json:"sender_info"`
 	Route      Route             `json:"route"`
@@ -60,7 +60,7 @@ type Transaction struct {
 	Extra      string            `json:"extra"`
 }
 
-// Operation represents a single operation object in Stellar attachment
+// Operation represents a single operation object in Payshares attachment
 type Operation struct {
 	// Overriddes Transaction field for this operation
 	SenderInfo map[string]string `json:"sender_info"`

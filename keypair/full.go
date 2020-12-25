@@ -4,8 +4,8 @@ import (
 	"bytes"
 
 	"github.com/agl/ed25519"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/psrkey"
+	"github.com/payshares/go/xdr"
 )
 
 type Full struct {
@@ -13,7 +13,7 @@ type Full struct {
 }
 
 func (kp *Full) Address() string {
-	return strkey.MustEncode(strkey.VersionByteAccountID, kp.publicKey()[:])
+	return psrkey.MustEncode(psrkey.VersionByteAccountID, kp.publicKey()[:])
 }
 
 func (kp *Full) Hint() (r [4]byte) {
@@ -71,5 +71,5 @@ func (kp *Full) keys() (*[32]byte, *[64]byte) {
 }
 
 func (kp *Full) rawSeed() []byte {
-	return strkey.MustDecode(strkey.VersionByteSeed, kp.seed)
+	return psrkey.MustDecode(psrkey.VersionByteSeed, kp.seed)
 }

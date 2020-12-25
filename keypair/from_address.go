@@ -2,14 +2,14 @@ package keypair
 
 import (
 	"github.com/agl/ed25519"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/psrkey"
+	"github.com/payshares/go/xdr"
 )
 
 // FromAddress represents a keypair to which only the address is know.  This KP
 // can verify signatures, but cannot sign them.
 //
-// NOTE: ensure the address provided is a valid strkey encoded stellar address.
+// NOTE: ensure the address provided is a valid psrkey encoded payshares address.
 // Some operations will panic otherwise. It's recommended that you create these
 // structs through the Parse() method.
 type FromAddress struct {
@@ -48,7 +48,7 @@ func (kp *FromAddress) SignDecorated(input []byte) (xdr.DecoratedSignature, erro
 }
 
 func (kp *FromAddress) publicKey() *[32]byte {
-	bytes := strkey.MustDecode(strkey.VersionByteAccountID, kp.address)
+	bytes := psrkey.MustDecode(psrkey.VersionByteAccountID, kp.address)
 	var result [32]byte
 
 	copy(result[:], bytes)

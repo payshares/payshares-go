@@ -9,7 +9,7 @@ imports:
   version: 523a5da1a92f01b01f840b61689c0340a0243532
 - name: github.com/asaskevich/govalidator
   version: f0666aa80d7dcf75bd564ae8717b952d74a29d6a
-  repo: https://github.com/stellar/govalidator.git
+  repo: https://github.com/payshares/govalidator.git
 - name: github.com/aws/aws-sdk-go
   version: d3e3f4281292478e8095bea047e2297e005152da
   subpackages:

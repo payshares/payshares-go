@@ -5,7 +5,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -74,7 +74,7 @@ var _ = Describe("SetOptionsBuilder Mutators", func() {
 	})
 
 	Describe("InflationDest", func() {
-		Context("using a valid stellar address", func() {
+		Context("using a valid payshares address", func() {
 			BeforeEach(func() { mut = InflationDest(address) })
 
 			It("succeeds", func() {
@@ -96,14 +96,14 @@ var _ = Describe("SetOptionsBuilder Mutators", func() {
 
 	Describe("HomeDomain", func() {
 		Context("using a valid value", func() {
-			BeforeEach(func() { mut = HomeDomain("stellar.org") })
+			BeforeEach(func() { mut = HomeDomain("payshares.org") })
 
 			It("succeeds", func() {
 				Expect(subject.Err).NotTo(HaveOccurred())
 			})
 
 			It("sets the HomeDomain to correct value", func() {
-				Expect(*subject.SO.HomeDomain).To(Equal(xdr.String32("stellar.org")))
+				Expect(*subject.SO.HomeDomain).To(Equal(xdr.String32("payshares.org")))
 			})
 		})
 
@@ -187,7 +187,7 @@ var _ = Describe("SetOptionsBuilder Mutators", func() {
 	})
 
 	Describe("SourceAccount", func() {
-		Context("using a valid stellar address", func() {
+		Context("using a valid payshares address", func() {
 			BeforeEach(func() { mut = SourceAccount{address} })
 
 			It("succeeds", func() {

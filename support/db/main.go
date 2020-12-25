@@ -1,4 +1,4 @@
-// Package db is the base package for database access at stellar.  It primarily
+// Package db is the base package for database access at payshares.  It primarily
 // exposes Session which is a lightweight wrapper around a *sqlx.DB that
 // provides utility methods (See the repo tests for examples).
 //
@@ -16,7 +16,7 @@ import (
 
 	"github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/support/errors"
 	"golang.org/x/net/context"
 
 	// Enable mysql

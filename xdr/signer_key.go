@@ -3,38 +3,38 @@ package xdr
 import (
 	"fmt"
 
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/psrkey"
+	"github.com/payshares/go/support/errors"
 )
 
-// Address returns the strkey encoded form of this signer key.  This method will
+// Address returns the psrkey encoded form of this signer key.  This method will
 // panic if the SignerKey is of an unknown type.
 func (skey *SignerKey) Address() string {
 	if skey == nil {
 		return ""
 	}
 
-	vb := strkey.VersionByte(0)
+	vb := psrkey.VersionByte(0)
 	raw := make([]byte, 32)
 
 	switch skey.Type {
 	case SignerKeyTypeSignerKeyTypeEd25519:
-		vb = strkey.VersionByteAccountID
+		vb = psrkey.VersionByteAccountID
 		key := skey.MustEd25519()
 		copy(raw, key[:])
 	case SignerKeyTypeSignerKeyTypeHashX:
-		vb = strkey.VersionByteHashX
+		vb = psrkey.VersionByteHashX
 		key := skey.MustHashX()
 		copy(raw, key[:])
 	case SignerKeyTypeSignerKeyTypeHashTx:
-		vb = strkey.VersionByteHashTx
+		vb = psrkey.VersionByteHashTx
 		key := skey.MustHashTx()
 		copy(raw, key[:])
 	default:
 		panic(fmt.Errorf("Unknown signer key type: %v", skey.Type))
 	}
 
-	return strkey.MustEncode(vb, raw)
+	return psrkey.MustEncode(vb, raw)
 }
 
 // Equals returns true if `other` is equivalent to `skey`
@@ -68,7 +68,7 @@ func (skey *SignerKey) SetAddress(address string) error {
 		return nil
 	}
 
-	vb, err := strkey.Version(address)
+	vb, err := psrkey.Version(address)
 	if err != nil {
 		return errors.Wrap(err, "failed to extract address version")
 	}
@@ -76,17 +76,17 @@ func (skey *SignerKey) SetAddress(address string) error {
 	var keytype SignerKeyType
 
 	switch vb {
-	case strkey.VersionByteAccountID:
+	case psrkey.VersionByteAccountID:
 		keytype = SignerKeyTypeSignerKeyTypeEd25519
-	case strkey.VersionByteHashX:
+	case psrkey.VersionByteHashX:
 		keytype = SignerKeyTypeSignerKeyTypeHashX
-	case strkey.VersionByteHashTx:
+	case psrkey.VersionByteHashTx:
 		keytype = SignerKeyTypeSignerKeyTypeHashTx
 	default:
 		return errors.Errorf("invalid version byte: %v", vb)
 	}
 
-	raw, err := strkey.Decode(vb, address)
+	raw, err := psrkey.Decode(vb, address)
 	if err != nil {
 		return err
 	}

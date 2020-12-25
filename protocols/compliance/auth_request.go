@@ -7,9 +7,9 @@ import (
 	"net/url"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/stellar/go/clients/stellartoml"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/clients/paysharestoml"
+	"github.com/payshares/go/keypair"
+	"github.com/payshares/go/support/errors"
 )
 
 func (r *AuthRequest) Populate(request *http.Request) *AuthRequest {
@@ -45,23 +45,23 @@ func (r *AuthRequest) Validate() error {
 }
 
 // VerifySignature verifies if signature is valid. It makes a network connection
-// to sender server in order to obtain stellar.toml file and signing key.
+// to sender server in order to obtain payshares.toml file and signing key.
 func (r *AuthRequest) VerifySignature(sender string) error {
 	signatureBytes, err := base64.StdEncoding.DecodeString(r.Signature)
 	if err != nil {
 		return errors.New("Signature is not base64 encoded")
 	}
 
-	senderStellarToml, err := stellartoml.GetStellarTomlByAddress(sender)
+	senderPaysharesToml, err := paysharestoml.GetPaysharesTomlByAddress(sender)
 	if err != nil {
-		return errors.Wrap(err, "Cannot get stellar.toml of sender domain")
+		return errors.Wrap(err, "Cannot get payshares.toml of sender domain")
 	}
 
-	if senderStellarToml.SigningKey == "" {
-		return errors.New("No SIGNING_KEY in stellar.toml of sender")
+	if senderPaysharesToml.SigningKey == "" {
+		return errors.New("No SIGNING_KEY in payshares.toml of sender")
 	}
 
-	kp, err := keypair.Parse(senderStellarToml.SigningKey)
+	kp, err := keypair.Parse(senderPaysharesToml.SigningKey)
 	if err != nil {
 		return errors.New("SigningKey is invalid")
 	}

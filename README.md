@@ -1,9 +1,9 @@
-# Stellar Go 
-[![Build Status](https://travis-ci.org/stellar/go.svg?branch=master)](https://travis-ci.org/stellar/go) 
-[![GoDoc](https://godoc.org/github.com/stellar/go?status.svg)](https://godoc.org/github.com/stellar/go)
-[![Go Report Card](https://goreportcard.com/badge/github.com/stellar/go)](https://goreportcard.com/report/github.com/stellar/go)
+# Payshares Go 
+[![Build Status](https://travis-ci.org/payshares/go.svg?branch=master)](https://travis-ci.org/payshares/go) 
+[![GoDoc](https://godoc.org/github.com/payshares/go?status.svg)](https://godoc.org/github.com/payshares/go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/payshares/go)](https://goreportcard.com/report/github.com/payshares/go)
 
-This repo is the home for all of the public go code produced by SDF.  In addition to various tools and services, this repository is the SDK from which you may develop your own applications that integrate with the stellar network.
+This repo is the home for all of the public go code produced by SDF.  In addition to various tools and services, this repository is the SDK from which you may develop your own applications that integrate with the payshares network.
 
 ## Dependencies
 
@@ -18,10 +18,10 @@ When creating this project, we had to decide whether or not we committed our ext
 
 In addition to the other top-level packages, there are a few special directories that contain specific types of packages:
 
-* **clients** contains packages that provide client packages to the various Stellar services.
+* **clients** contains packages that provide client packages to the various Payshares services.
 * **exp** contains experimental packages.  Use at your own risk.
-* **handlers** contains packages that provide pluggable implementors of `http.Handler` that make it easier to incorporate portions of the Stellar protocol into your own http server. 
-* **support** contains packages that are not intended for consumption outside of Stellar's other packages.  Packages that provide common infrastructure for use in our services and tools should go here, such as `db` or `log`. 
+* **handlers** contains packages that provide pluggable implementors of `http.Handler` that make it easier to incorporate portions of the Payshares protocol into your own http server. 
+* **support** contains packages that are not intended for consumption outside of Payshares's other packages.  Packages that provide common infrastructure for use in our services and tools should go here, such as `db` or `log`. 
 * **support/scripts** contains single-file go programs and bash scripts used to support the development of this repo. 
 * **services** contains packages that compile to applications that are long-running processes (such as API servers).
 * **tools** contains packages that compile to command line applications.
@@ -30,7 +30,7 @@ Each of these directories have their own README file that explain further the na
 
 ### Other packages
 
-In addition to the packages described above, this repository contains various packages related to working with the Stellar network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/stellar/go#pkg-subdirectories) to browse the documentation for each.
+In addition to the packages described above, this repository contains various packages related to working with the Payshares network from a go program.  It's recommended that you use [godoc](https://godoc.org/github.com/payshares/go#pkg-subdirectories) to browse the documentation for each.
 
 
 ## Package source layout

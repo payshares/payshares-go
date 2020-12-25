@@ -3,8 +3,8 @@ package horizon
 import (
 	"encoding/json"
 
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/xdr"
 )
 
 func (herr *Error) Error() string {

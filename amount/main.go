@@ -1,12 +1,12 @@
 // Package amount provides utilities for converting numbers to/from
-// the format used internally to stellar-core.
+// the format used internally to payshares-core.
 //
-// stellar-core represents asset "amounts" as 64-bit integers, but to enable
+// payshares-core represents asset "amounts" as 64-bit integers, but to enable
 // fractional units of an asset, horizon, the client-libraries and other built
-// on top of stellar-core use a convention, encoding amounts as a string of
+// on top of payshares-core use a convention, encoding amounts as a string of
 // decimal digits with up to seven digits of precision in the fractional
 // portion. For example, an amount shown as "101.001" in horizon would be
-// represented in stellar-core as 1010010000.
+// represented in payshares-core as 1010010000.
 package amount
 
 import (
@@ -14,10 +14,10 @@ import (
 	"math/big"
 	"strconv"
 
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/xdr"
 )
 
-// One is the value of one whole unit of currency.  Stellar uses 7 fixed digits
+// One is the value of one whole unit of currency.  Payshares uses 7 fixed digits
 // for fractional values, thus One is 10 million (10^7)
 const One = 10000000
 
@@ -30,7 +30,7 @@ func MustParse(v string) xdr.Int64 {
 	return ret
 }
 
-// Parse parses the provided as a stellar "amount", i.e. A 64-bit signed integer
+// Parse parses the provided as a payshares "amount", i.e. A 64-bit signed integer
 // that represents a decimal number with 7 digits of significance in the
 // fractional portion of the number.
 func Parse(v string) (xdr.Int64, error) {

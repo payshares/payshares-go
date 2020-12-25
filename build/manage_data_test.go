@@ -5,7 +5,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/xdr"
 )
 
 var _ = Describe("ClearData", func() {
@@ -144,7 +144,7 @@ var _ = Describe("ManageData Mutators", func() {
 	})
 
 	Describe("SourceAccount", func() {
-		Context("using a valid stellar address", func() {
+		Context("using a valid payshares address", func() {
 			BeforeEach(func() { mut = SourceAccount{address} })
 
 			It("succeeds", func() {

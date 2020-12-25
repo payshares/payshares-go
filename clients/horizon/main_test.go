@@ -7,8 +7,8 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/http/httptest"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/support/http/httptest"
 	"golang.org/x/net/context"
 )
 
@@ -35,7 +35,7 @@ func ExampleStream() {
 
 func TestHorizon(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Package: github.com/stellar/go/horizon")
+	RunSpecs(t, "Package: github.com/payshares/go/horizon")
 }
 
 var _ = Describe("Horizon", func() {
@@ -260,26 +260,26 @@ var _ = Describe("Horizon", func() {
 var accountResponse = `{
   "_links": {
     "self": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H"
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H"
     },
     "transactions": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/transactions{?cursor,limit,order}",
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/transactions{?cursor,limit,order}",
       "templated": true
     },
     "operations": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/operations{?cursor,limit,order}",
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/operations{?cursor,limit,order}",
       "templated": true
     },
     "payments": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/payments{?cursor,limit,order}",
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/payments{?cursor,limit,order}",
       "templated": true
     },
     "effects": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/effects{?cursor,limit,order}",
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/effects{?cursor,limit,order}",
       "templated": true
     },
     "offers": {
-      "href": "https://horizon-testnet.stellar.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/Offers{?cursor,limit,order}",
+      "href": "https://horizon-testnet.payshares.org/accounts/GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H/Offers{?cursor,limit,order}",
       "templated": true
     }
   },
@@ -325,13 +325,13 @@ var accountResponse = `{
 var accountOffersResponse = `{
   "_links": {
     "self": {
-      "href": "https://horizon.stellar.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=asc\u0026limit=10\u0026cursor="
+      "href": "https://horizon.payshares.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=asc\u0026limit=10\u0026cursor="
     },
     "next": {
-      "href": "https://horizon.stellar.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=asc\u0026limit=10\u0026cursor=2539"
+      "href": "https://horizon.payshares.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=asc\u0026limit=10\u0026cursor=2539"
     },
     "prev": {
-      "href": "https://horizon.stellar.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=desc\u0026limit=10\u0026cursor=161"
+      "href": "https://horizon.payshares.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK/offers?order=desc\u0026limit=10\u0026cursor=161"
     }
   },
   "_embedded": {
@@ -339,10 +339,10 @@ var accountOffersResponse = `{
       {
         "_links": {
           "self": {
-            "href": "https://horizon.stellar.org/offers/161"
+            "href": "https://horizon.payshares.org/offers/161"
           },
           "offer_maker": {
-            "href": "https://horizon.stellar.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK"
+            "href": "https://horizon.payshares.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK"
           }
         },
         "id": 161,
@@ -366,10 +366,10 @@ var accountOffersResponse = `{
       {
         "_links": {
           "self": {
-            "href": "https://horizon.stellar.org/offers/2539"
+            "href": "https://horizon.payshares.org/offers/2539"
           },
           "offer_maker": {
-            "href": "https://horizon.stellar.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK"
+            "href": "https://horizon.payshares.org/accounts/GC2BQYBXFOVPRDH35D5HT2AFVCDGXJM5YVTAF5THFSAISYOWAJQKRESK"
           }
         },
         "id": 2539,
@@ -730,7 +730,7 @@ var orderBookResponse = `{
 }`
 
 var notFoundResponse = `{
-  "type": "https://stellar.org/horizon-errors/not_found",
+  "type": "https://payshares.org/horizon-errors/not_found",
   "title": "Resource Missing",
   "status": 404,
   "detail": "The resource at the url requested was not found.  This is usually occurs for one of two reasons:  The url requested is not valid, or no data in our database could be found with the parameters provided.",
@@ -740,7 +740,7 @@ var notFoundResponse = `{
 var submitResponse = `{
   "_links": {
     "transaction": {
-      "href": "https://horizon-testnet.stellar.org/transactions/ee14b93fcd31d4cfe835b941a0a8744e23a6677097db1fafe0552d8657bed940"
+      "href": "https://horizon-testnet.payshares.org/transactions/ee14b93fcd31d4cfe835b941a0a8744e23a6677097db1fafe0552d8657bed940"
     }
   },
   "hash": "ee14b93fcd31d4cfe835b941a0a8744e23a6677097db1fafe0552d8657bed940",
@@ -751,11 +751,11 @@ var submitResponse = `{
 }`
 
 var transactionFailure = `{
-  "type": "https://stellar.org/horizon-errors/transaction_failed",
+  "type": "https://payshares.org/horizon-errors/transaction_failed",
   "title": "Transaction Failed",
   "status": 400,
-  "detail": "The transaction failed when submitted to the stellar network. The extras.result_codes field on this response contains further details.  Descriptions of each code can be found at: https://www.stellar.org/developers/learn/concepts/list-of-operations.html",
-  "instance": "horizon-testnet-001.prd.stellar001.internal.stellar-ops.com/4elYz2fHhC-528285",
+  "detail": "The transaction failed when submitted to the payshares network. The extras.result_codes field on this response contains further details.  Descriptions of each code can be found at: https://www.payshares.org/developers/learn/concepts/list-of-operations.html",
+  "instance": "horizon-testnet-001.prd.payshares001.internal.payshares-ops.com/4elYz2fHhC-528285",
   "extras": {
     "envelope_xdr": "AAAAAKpmDL6Z4hvZmkTBkYpHftan4ogzTaO4XTB7joLgQnYYAAAAZAAAAAAABeoyAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAD3sEVVGZGi/NoC3ta/8f/YZKMzyi9ZJpOi0H47x7IqYAAAAAAAAAAAF9eEAAAAAAAAAAAA=",
     "result_codes": {

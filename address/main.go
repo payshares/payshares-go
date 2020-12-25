@@ -1,6 +1,6 @@
-// Package address provides utility functions for working with stellar
-// addresses. See https://www.stellar.org/developers/guides/concepts/federation.
-// html#stellar-addresses for more on addresses.
+// Package address provides utility functions for working with payshares
+// addresses. See https://www.payshares.org/developers/guides/concepts/federation.
+// html#payshares-addresses for more on addresses.
 package address
 
 import (
@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/support/errors"
 )
 
 // Separator seperates the name and domain portions of an address

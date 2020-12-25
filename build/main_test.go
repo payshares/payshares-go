@@ -10,11 +10,11 @@ import (
 
 func TestBuild(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Package: github.com/stellar/go/build")
+	RunSpecs(t, "Package: github.com/payshares/go/build")
 }
 
 // ExampleTransactionBuilder creates and signs a simple transaction, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 //
 // It uses the transaction builder system
 func ExampleTransactionBuilder() {
@@ -37,7 +37,7 @@ func ExampleTransactionBuilder() {
 }
 
 // ExamplePathPayment creates and signs a simple transaction with PathPayment operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExamplePathPayment() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -61,7 +61,7 @@ func ExamplePathPayment() {
 }
 
 // ExampleSetOptions creates and signs a simple transaction with SetOptions operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleSetOptions() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -78,7 +78,7 @@ func ExampleSetOptions() {
 			ClearAuthImmutable(),
 			MasterWeight(1),
 			SetThresholds(2, 3, 4),
-			HomeDomain("stellar.org"),
+			HomeDomain("payshares.org"),
 			AddSigner("GC6DDGPXVWXD5V6XOWJ7VUTDYI7VKPV2RAJWBVBHR47OPV5NASUNHTJW", 5),
 		),
 	)
@@ -91,7 +91,7 @@ func ExampleSetOptions() {
 }
 
 // ExampleSetOptionsOperations creates and signs a simple transaction with many SetOptions operations, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleSetOptionsOperations() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -107,7 +107,7 @@ func ExampleSetOptionsOperations() {
 		ClearAuthImmutable(),
 		MasterWeight(1),
 		SetThresholds(2, 3, 4),
-		HomeDomain("stellar.org"),
+		HomeDomain("payshares.org"),
 		RemoveSigner("GC6DDGPXVWXD5V6XOWJ7VUTDYI7VKPV2RAJWBVBHR47OPV5NASUNHTJW"),
 	)
 
@@ -119,7 +119,7 @@ func ExampleSetOptionsOperations() {
 }
 
 // ExampleChangeTrust creates and signs a simple transaction with ChangeTrust operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleChangeTrust() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -137,7 +137,7 @@ func ExampleChangeTrust() {
 }
 
 // ExampleChangeTrustMaxLimit creates and signs a simple transaction with ChangeTrust operation (maximum limit), and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleChangeTrustMaxLimit() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -155,7 +155,7 @@ func ExampleChangeTrustMaxLimit() {
 }
 
 // ExampleRemoveTrust creates and signs a simple transaction with ChangeTrust operation (remove trust), and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleRemoveTrust() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	operationSource := "GCVJCNUHSGKOTBBSXZJ7JJZNOSE2YDNGRLIDPMQDUEQWJQSE6QZSDPNU"
@@ -178,7 +178,7 @@ func ExampleRemoveTrust() {
 }
 
 // ExampleManageOffer creates and signs a simple transaction with ManageOffer operations, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleManageOffer() {
 	rate := Rate{
 		Selling: NativeAsset(),
@@ -204,7 +204,7 @@ func ExampleManageOffer() {
 }
 
 // ExampleCreatePassiveOffer creates and signs a simple transaction with CreatePassiveOffer operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleCreatePassiveOffer() {
 	rate := Rate{
 		Selling: NativeAsset(),
@@ -228,7 +228,7 @@ func ExampleCreatePassiveOffer() {
 }
 
 // ExampleAccountMerge creates and signs a simple transaction with AccountMerge operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleAccountMerge() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(
@@ -248,7 +248,7 @@ func ExampleAccountMerge() {
 }
 
 // ExampleInflation creates and signs a simple transaction with Inflation operation, and then
-// encodes it into a base64 string capable of being submitted to stellar-core.
+// encodes it into a base64 string capable of being submitted to payshares-core.
 func ExampleInflation() {
 	seed := "SDOTALIMPAM2IV65IOZA7KZL7XWZI5BODFXTRVLIHLQZQCKK57PH5F3H"
 	tx := Transaction(

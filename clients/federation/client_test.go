@@ -6,28 +6,28 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stellar/go/clients/stellartoml"
-	"github.com/stellar/go/support/http/httptest"
+	"github.com/payshares/go/clients/paysharestoml"
+	"github.com/payshares/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLookupByAddress(t *testing.T) {
 	hmock := httptest.NewClient()
-	tomlmock := &stellartoml.MockClient{}
-	c := &Client{StellarTOML: tomlmock, HTTP: hmock}
+	tomlmock := &paysharestoml.MockClient{}
+	c := &Client{PaysharesTOML: tomlmock, HTTP: hmock}
 
 	// happy path - string integer
-	tomlmock.On("GetStellarToml", "stellar.org").Return(&stellartoml.Response{
-		FederationServer: "https://stellar.org/federation",
+	tomlmock.On("GetPaysharesToml", "payshares.org").Return(&paysharestoml.Response{
+		FederationServer: "https://payshares.org/federation",
 	}, nil)
-	hmock.On("GET", "https://stellar.org/federation").
+	hmock.On("GET", "https://payshares.org/federation").
 		ReturnJSON(http.StatusOK, map[string]string{
-			"stellar_address": "scott*stellar.org",
+			"payshares_address": "scott*payshares.org",
 			"account_id":      "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C",
 			"memo_type":       "id",
 			"memo":            "123",
 		})
-	resp, err := c.LookupByAddress("scott*stellar.org")
+	resp, err := c.LookupByAddress("scott*payshares.org")
 
 	if assert.NoError(t, err) {
 		assert.Equal(t, "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C", resp.AccountID)
@@ -36,17 +36,17 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// happy path - integer
-	tomlmock.On("GetStellarToml", "stellar.org").Return(&stellartoml.Response{
-		FederationServer: "https://stellar.org/federation",
+	tomlmock.On("GetPaysharesToml", "payshares.org").Return(&paysharestoml.Response{
+		FederationServer: "https://payshares.org/federation",
 	}, nil)
-	hmock.On("GET", "https://stellar.org/federation").
+	hmock.On("GET", "https://payshares.org/federation").
 		ReturnJSON(http.StatusOK, map[string]interface{}{
-			"stellar_address": "scott*stellar.org",
+			"payshares_address": "scott*payshares.org",
 			"account_id":      "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C",
 			"memo_type":       "id",
 			"memo":            123,
 		})
-	resp, err = c.LookupByAddress("scott*stellar.org")
+	resp, err = c.LookupByAddress("scott*payshares.org")
 
 	if assert.NoError(t, err) {
 		assert.Equal(t, "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C", resp.AccountID)
@@ -55,17 +55,17 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// happy path - string
-	tomlmock.On("GetStellarToml", "stellar.org").Return(&stellartoml.Response{
-		FederationServer: "https://stellar.org/federation",
+	tomlmock.On("GetPaysharesToml", "payshares.org").Return(&paysharestoml.Response{
+		FederationServer: "https://payshares.org/federation",
 	}, nil)
-	hmock.On("GET", "https://stellar.org/federation").
+	hmock.On("GET", "https://payshares.org/federation").
 		ReturnJSON(http.StatusOK, map[string]interface{}{
-			"stellar_address": "scott*stellar.org",
+			"payshares_address": "scott*payshares.org",
 			"account_id":      "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C",
 			"memo_type":       "text",
 			"memo":            "testing",
 		})
-	resp, err = c.LookupByAddress("scott*stellar.org")
+	resp, err = c.LookupByAddress("scott*payshares.org")
 
 	if assert.NoError(t, err) {
 		assert.Equal(t, "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C", resp.AccountID)
@@ -74,12 +74,12 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// response exceeds limit
-	tomlmock.On("GetStellarToml", "toobig.org").Return(&stellartoml.Response{
+	tomlmock.On("GetPaysharesToml", "toobig.org").Return(&paysharestoml.Response{
 		FederationServer: "https://toobig.org/federation",
 	}, nil)
 	hmock.On("GET", "https://toobig.org/federation").
 		ReturnJSON(http.StatusOK, map[string]string{
-			"stellar_address": strings.Repeat("0", FederationResponseMaxSize) + "*stellar.org",
+			"payshares_address": strings.Repeat("0", FederationResponseMaxSize) + "*payshares.org",
 			"account_id":      "GASTNVNLHVR3NFO3QACMHCJT3JUSIV4NBXDHDO4VTPDTNN65W3B2766C",
 			"memo_type":       "id",
 			"memo":            "123",
@@ -90,8 +90,8 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// failed toml resolution
-	tomlmock.On("GetStellarToml", "missing.org").Return(
-		(*stellartoml.Response)(nil),
+	tomlmock.On("GetPaysharesToml", "missing.org").Return(
+		(*paysharestoml.Response)(nil),
 		errors.New("toml failed"),
 	)
 	resp, err = c.LookupByAddress("scott*missing.org")
@@ -100,7 +100,7 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// 404 federation response
-	tomlmock.On("GetStellarToml", "404.org").Return(&stellartoml.Response{
+	tomlmock.On("GetPaysharesToml", "404.org").Return(&paysharestoml.Response{
 		FederationServer: "https://404.org/federation",
 	}, nil)
 	hmock.On("GET", "https://404.org/federation").ReturnNotFound()
@@ -110,7 +110,7 @@ func TestLookupByAddress(t *testing.T) {
 	}
 
 	// connection error on federation response
-	tomlmock.On("GetStellarToml", "error.org").Return(&stellartoml.Response{
+	tomlmock.On("GetPaysharesToml", "error.org").Return(&paysharestoml.Response{
 		FederationServer: "https://error.org/federation",
 	}, nil)
 	hmock.On("GET", "https://error.org/federation").ReturnError("kaboom!")
@@ -135,6 +135,6 @@ func Test_url(t *testing.T) {
 	c := &Client{}
 
 	// regression: ensure that query is properly URI encoded
-	url := c.url("", "q", "scott+receiver1@stellar.org*stellar.org")
-	assert.Equal(t, "?q=scott%2Breceiver1%40stellar.org%2Astellar.org&type=q", url)
+	url := c.url("", "q", "scott+receiver1@payshares.org*payshares.org")
+	assert.Equal(t, "?q=scott%2Breceiver1%40payshares.org%2Apayshares.org&type=q", url)
 }

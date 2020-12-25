@@ -9,13 +9,13 @@ import (
 
 	"github.com/rs/cors"
 	"github.com/spf13/cobra"
-	"github.com/stellar/go/handlers/federation"
-	"github.com/stellar/go/support/app"
-	"github.com/stellar/go/support/config"
-	"github.com/stellar/go/support/db"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/http"
-	"github.com/stellar/go/support/log"
+	"github.com/payshares/go/handlers/federation"
+	"github.com/payshares/go/support/app"
+	"github.com/payshares/go/support/config"
+	"github.com/payshares/go/support/db"
+	"github.com/payshares/go/support/errors"
+	"github.com/payshares/go/support/http"
+	"github.com/payshares/go/support/log"
 )
 
 // Config represents the configuration of a federation server
@@ -38,9 +38,9 @@ type Config struct {
 func main() {
 	rootCmd := &cobra.Command{
 		Use:   "federation",
-		Short: "stellar federation server",
+		Short: "payshares federation server",
 		Long: `
-The stellar federation server let's you easily integrate the stellar federation 
+The payshares federation server let's you easily integrate the payshares federation 
 protocol with your organization.  This is achieved by connecting the 
 application to your customer database and providing the appropriate queries in 
 the config file.

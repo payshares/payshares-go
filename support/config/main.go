@@ -8,8 +8,8 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/asaskevich/govalidator"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/psrkey"
+	"github.com/payshares/go/support/errors"
 )
 
 // InvalidConfigError is the error that is returned when an invalid
@@ -56,19 +56,19 @@ func decode(content string, dest interface{}) error {
 
 func init() {
 	govalidator.SetFieldsRequiredByDefault(true)
-	govalidator.CustomTypeTagMap.Set("stellar_accountid", govalidator.CustomTypeValidator(isStellarAccountID))
-	govalidator.CustomTypeTagMap.Set("stellar_seed", govalidator.CustomTypeValidator(isStellarSeed))
+	govalidator.CustomTypeTagMap.Set("payshares_accountid", govalidator.CustomTypeValidator(isPaysharesAccountID))
+	govalidator.CustomTypeTagMap.Set("payshares_seed", govalidator.CustomTypeValidator(isPaysharesSeed))
 
 }
 
-func isStellarAccountID(i interface{}, context interface{}) bool {
+func isPaysharesAccountID(i interface{}, context interface{}) bool {
 	enc, ok := i.(string)
 
 	if !ok {
 		return false
 	}
 
-	_, err := strkey.Decode(strkey.VersionByteAccountID, enc)
+	_, err := psrkey.Decode(psrkey.VersionByteAccountID, enc)
 
 	if err == nil {
 		return true
@@ -77,14 +77,14 @@ func isStellarAccountID(i interface{}, context interface{}) bool {
 	return false
 }
 
-func isStellarSeed(i interface{}, context interface{}) bool {
+func isPaysharesSeed(i interface{}, context interface{}) bool {
 	enc, ok := i.(string)
 
 	if !ok {
 		return false
 	}
 
-	_, err := strkey.Decode(strkey.VersionByteSeed, enc)
+	_, err := psrkey.Decode(psrkey.VersionByteSeed, enc)
 
 	if err == nil {
 		return true

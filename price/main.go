@@ -1,4 +1,4 @@
-// Package price implements functions to ease working with stellar price values.
+// Package price implements functions to ease working with payshares price values.
 // At present, prices are only used within the offer system, and are represented
 // by a fraction whose numberator and denominator are both 32-bit signed
 // integers.
@@ -10,7 +10,7 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/stellar/go/xdr"
+	"github.com/payshares/go/xdr"
 )
 
 // Parse  calculates and returns the best rational approximation of the given

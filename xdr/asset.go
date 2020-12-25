@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/stellar/go/strkey"
+	"github.com/payshares/go/psrkey"
 )
 
 // This file contains helpers for working with xdr.Asset structs
@@ -130,11 +130,11 @@ func (a Asset) Extract(typ interface{}, code interface{}, issuer interface{}) er
 			case AssetTypeAssetTypeCreditAlphanum4:
 				an := a.MustAlphaNum4()
 				raw := an.Issuer.MustEd25519()
-				*issuer = strkey.MustEncode(strkey.VersionByteAccountID, raw[:])
+				*issuer = psrkey.MustEncode(psrkey.VersionByteAccountID, raw[:])
 			case AssetTypeAssetTypeCreditAlphanum12:
 				an := a.MustAlphaNum12()
 				raw := an.Issuer.MustEd25519()
-				*issuer = strkey.MustEncode(strkey.VersionByteAccountID, raw[:])
+				*issuer = psrkey.MustEncode(psrkey.VersionByteAccountID, raw[:])
 			}
 		default:
 			return errors.New("can't extract issuer")

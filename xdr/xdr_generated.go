@@ -1,11 +1,11 @@
 // Package xdr is generated from:
 //
-//  xdr/Stellar-types.x
-//  xdr/Stellar-ledger-entries.x
-//  xdr/Stellar-transaction.x
-//  xdr/Stellar-ledger.x
-//  xdr/Stellar-overlay.x
-//  xdr/Stellar-SCP.x
+//  xdr/Payshares-types.x
+//  xdr/Payshares-ledger-entries.x
+//  xdr/Payshares-transaction.x
+//  xdr/Payshares-ledger.x
+//  xdr/Payshares-overlay.x
+//  xdr/Payshares-SCP.x
 //
 // DO NOT EDIT or your changes may be overwritten
 package xdr
@@ -4919,7 +4919,7 @@ func (e UpgradeType) XDRMaxSize() int {
 	return 128
 }
 
-// StellarValueExt is an XDR NestedUnion defines as:
+// PaysharesValueExt is an XDR NestedUnion defines as:
 //
 //   union switch (int v)
 //        {
@@ -4927,19 +4927,19 @@ func (e UpgradeType) XDRMaxSize() int {
 //            void;
 //        }
 //
-type StellarValueExt struct {
+type PaysharesValueExt struct {
 	V int32
 }
 
 // SwitchFieldName returns the field name in which this union's
 // discriminant is stored
-func (u StellarValueExt) SwitchFieldName() string {
+func (u PaysharesValueExt) SwitchFieldName() string {
 	return "V"
 }
 
 // ArmForSwitch returns which field name should be used for storing
-// the value for an instance of StellarValueExt
-func (u StellarValueExt) ArmForSwitch(sw int32) (string, bool) {
+// the value for an instance of PaysharesValueExt
+func (u PaysharesValueExt) ArmForSwitch(sw int32) (string, bool) {
 	switch int32(sw) {
 	case 0:
 		return "", true
@@ -4947,8 +4947,8 @@ func (u StellarValueExt) ArmForSwitch(sw int32) (string, bool) {
 	return "-", false
 }
 
-// NewStellarValueExt creates a new  StellarValueExt.
-func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err error) {
+// NewPaysharesValueExt creates a new  PaysharesValueExt.
+func NewPaysharesValueExt(v int32, value interface{}) (result PaysharesValueExt, err error) {
 	result.V = v
 	switch int32(v) {
 	case 0:
@@ -4957,9 +4957,9 @@ func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err
 	return
 }
 
-// StellarValue is an XDR Struct defines as:
+// PaysharesValue is an XDR Struct defines as:
 //
-//   struct StellarValue
+//   struct PaysharesValue
 //    {
 //        Hash txSetHash;   // transaction set to apply to previous ledger
 //        uint64 closeTime; // network close time
@@ -4980,11 +4980,11 @@ func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err
 //        ext;
 //    };
 //
-type StellarValue struct {
+type PaysharesValue struct {
 	TxSetHash Hash
 	CloseTime Uint64
 	Upgrades  []UpgradeType `xdrmaxsize:"6"`
-	Ext       StellarValueExt
+	Ext       PaysharesValueExt
 }
 
 // LedgerHeaderExt is an XDR NestedUnion defines as:
@@ -5031,14 +5031,14 @@ func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err
 //    {
 //        uint32 ledgerVersion;    // the protocol version of the ledger
 //        Hash previousLedgerHash; // hash of the previous ledger header
-//        StellarValue scpValue;   // what consensus agreed to
+//        PaysharesValue scpValue;   // what consensus agreed to
 //        Hash txSetResultHash;    // the TransactionResultSet that led to this ledger
 //        Hash bucketListHash;     // hash of the ledger state
 //
 //        uint32 ledgerSeq; // sequence number of this ledger
 //
 //        int64 totalCoins; // total number of stroops in existence.
-//                          // 10,000,000 stroops in 1 XLM
+//                          // 10,000,000 stroops in 1 XPS
 //
 //        int64 feePool;       // fees burned since last inflation run
 //        uint32 inflationSeq; // inflation sequence number
@@ -5068,7 +5068,7 @@ func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err
 type LedgerHeader struct {
 	LedgerVersion      Uint32
 	PreviousLedgerHash Hash
-	ScpValue           StellarValue
+	ScpValue           PaysharesValue
 	TxSetResultHash    Hash
 	BucketListHash     Hash
 	LedgerSeq          Uint32
@@ -6624,9 +6624,9 @@ type DontHave struct {
 	ReqHash Uint256
 }
 
-// StellarMessage is an XDR Union defines as:
+// PaysharesMessage is an XDR Union defines as:
 //
-//   union StellarMessage switch (MessageType type)
+//   union PaysharesMessage switch (MessageType type)
 //    {
 //    case ERROR_MSG:
 //        Error error;
@@ -6660,7 +6660,7 @@ type DontHave struct {
 //        uint32 getSCPLedgerSeq; // ledger seq requested ; if 0, requests the latest
 //    };
 //
-type StellarMessage struct {
+type PaysharesMessage struct {
 	Type            MessageType
 	Error           *Error
 	Hello           *Hello
@@ -6678,13 +6678,13 @@ type StellarMessage struct {
 
 // SwitchFieldName returns the field name in which this union's
 // discriminant is stored
-func (u StellarMessage) SwitchFieldName() string {
+func (u PaysharesMessage) SwitchFieldName() string {
 	return "Type"
 }
 
 // ArmForSwitch returns which field name should be used for storing
-// the value for an instance of StellarMessage
-func (u StellarMessage) ArmForSwitch(sw int32) (string, bool) {
+// the value for an instance of PaysharesMessage
+func (u PaysharesMessage) ArmForSwitch(sw int32) (string, bool) {
 	switch MessageType(sw) {
 	case MessageTypeErrorMsg:
 		return "Error", true
@@ -6716,8 +6716,8 @@ func (u StellarMessage) ArmForSwitch(sw int32) (string, bool) {
 	return "-", false
 }
 
-// NewStellarMessage creates a new  StellarMessage.
-func NewStellarMessage(aType MessageType, value interface{}) (result StellarMessage, err error) {
+// NewPaysharesMessage creates a new  PaysharesMessage.
+func NewPaysharesMessage(aType MessageType, value interface{}) (result PaysharesMessage, err error) {
 	result.Type = aType
 	switch MessageType(aType) {
 	case MessageTypeErrorMsg:
@@ -6812,7 +6812,7 @@ func NewStellarMessage(aType MessageType, value interface{}) (result StellarMess
 
 // MustError retrieves the Error value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustError() Error {
+func (u PaysharesMessage) MustError() Error {
 	val, ok := u.GetError()
 
 	if !ok {
@@ -6824,7 +6824,7 @@ func (u StellarMessage) MustError() Error {
 
 // GetError retrieves the Error value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetError() (result Error, ok bool) {
+func (u PaysharesMessage) GetError() (result Error, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Error" {
@@ -6837,7 +6837,7 @@ func (u StellarMessage) GetError() (result Error, ok bool) {
 
 // MustHello retrieves the Hello value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustHello() Hello {
+func (u PaysharesMessage) MustHello() Hello {
 	val, ok := u.GetHello()
 
 	if !ok {
@@ -6849,7 +6849,7 @@ func (u StellarMessage) MustHello() Hello {
 
 // GetHello retrieves the Hello value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetHello() (result Hello, ok bool) {
+func (u PaysharesMessage) GetHello() (result Hello, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Hello" {
@@ -6862,7 +6862,7 @@ func (u StellarMessage) GetHello() (result Hello, ok bool) {
 
 // MustAuth retrieves the Auth value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustAuth() Auth {
+func (u PaysharesMessage) MustAuth() Auth {
 	val, ok := u.GetAuth()
 
 	if !ok {
@@ -6874,7 +6874,7 @@ func (u StellarMessage) MustAuth() Auth {
 
 // GetAuth retrieves the Auth value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetAuth() (result Auth, ok bool) {
+func (u PaysharesMessage) GetAuth() (result Auth, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Auth" {
@@ -6887,7 +6887,7 @@ func (u StellarMessage) GetAuth() (result Auth, ok bool) {
 
 // MustDontHave retrieves the DontHave value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustDontHave() DontHave {
+func (u PaysharesMessage) MustDontHave() DontHave {
 	val, ok := u.GetDontHave()
 
 	if !ok {
@@ -6899,7 +6899,7 @@ func (u StellarMessage) MustDontHave() DontHave {
 
 // GetDontHave retrieves the DontHave value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetDontHave() (result DontHave, ok bool) {
+func (u PaysharesMessage) GetDontHave() (result DontHave, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "DontHave" {
@@ -6912,7 +6912,7 @@ func (u StellarMessage) GetDontHave() (result DontHave, ok bool) {
 
 // MustPeers retrieves the Peers value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustPeers() []PeerAddress {
+func (u PaysharesMessage) MustPeers() []PeerAddress {
 	val, ok := u.GetPeers()
 
 	if !ok {
@@ -6924,7 +6924,7 @@ func (u StellarMessage) MustPeers() []PeerAddress {
 
 // GetPeers retrieves the Peers value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetPeers() (result []PeerAddress, ok bool) {
+func (u PaysharesMessage) GetPeers() (result []PeerAddress, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Peers" {
@@ -6937,7 +6937,7 @@ func (u StellarMessage) GetPeers() (result []PeerAddress, ok bool) {
 
 // MustTxSetHash retrieves the TxSetHash value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTxSetHash() Uint256 {
+func (u PaysharesMessage) MustTxSetHash() Uint256 {
 	val, ok := u.GetTxSetHash()
 
 	if !ok {
@@ -6949,7 +6949,7 @@ func (u StellarMessage) MustTxSetHash() Uint256 {
 
 // GetTxSetHash retrieves the TxSetHash value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTxSetHash() (result Uint256, ok bool) {
+func (u PaysharesMessage) GetTxSetHash() (result Uint256, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "TxSetHash" {
@@ -6962,7 +6962,7 @@ func (u StellarMessage) GetTxSetHash() (result Uint256, ok bool) {
 
 // MustTxSet retrieves the TxSet value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTxSet() TransactionSet {
+func (u PaysharesMessage) MustTxSet() TransactionSet {
 	val, ok := u.GetTxSet()
 
 	if !ok {
@@ -6974,7 +6974,7 @@ func (u StellarMessage) MustTxSet() TransactionSet {
 
 // GetTxSet retrieves the TxSet value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTxSet() (result TransactionSet, ok bool) {
+func (u PaysharesMessage) GetTxSet() (result TransactionSet, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "TxSet" {
@@ -6987,7 +6987,7 @@ func (u StellarMessage) GetTxSet() (result TransactionSet, ok bool) {
 
 // MustTransaction retrieves the Transaction value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustTransaction() TransactionEnvelope {
+func (u PaysharesMessage) MustTransaction() TransactionEnvelope {
 	val, ok := u.GetTransaction()
 
 	if !ok {
@@ -6999,7 +6999,7 @@ func (u StellarMessage) MustTransaction() TransactionEnvelope {
 
 // GetTransaction retrieves the Transaction value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
+func (u PaysharesMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Transaction" {
@@ -7012,7 +7012,7 @@ func (u StellarMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
 
 // MustQSetHash retrieves the QSetHash value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustQSetHash() Uint256 {
+func (u PaysharesMessage) MustQSetHash() Uint256 {
 	val, ok := u.GetQSetHash()
 
 	if !ok {
@@ -7024,7 +7024,7 @@ func (u StellarMessage) MustQSetHash() Uint256 {
 
 // GetQSetHash retrieves the QSetHash value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetQSetHash() (result Uint256, ok bool) {
+func (u PaysharesMessage) GetQSetHash() (result Uint256, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "QSetHash" {
@@ -7037,7 +7037,7 @@ func (u StellarMessage) GetQSetHash() (result Uint256, ok bool) {
 
 // MustQSet retrieves the QSet value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustQSet() ScpQuorumSet {
+func (u PaysharesMessage) MustQSet() ScpQuorumSet {
 	val, ok := u.GetQSet()
 
 	if !ok {
@@ -7049,7 +7049,7 @@ func (u StellarMessage) MustQSet() ScpQuorumSet {
 
 // GetQSet retrieves the QSet value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetQSet() (result ScpQuorumSet, ok bool) {
+func (u PaysharesMessage) GetQSet() (result ScpQuorumSet, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "QSet" {
@@ -7062,7 +7062,7 @@ func (u StellarMessage) GetQSet() (result ScpQuorumSet, ok bool) {
 
 // MustEnvelope retrieves the Envelope value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustEnvelope() ScpEnvelope {
+func (u PaysharesMessage) MustEnvelope() ScpEnvelope {
 	val, ok := u.GetEnvelope()
 
 	if !ok {
@@ -7074,7 +7074,7 @@ func (u StellarMessage) MustEnvelope() ScpEnvelope {
 
 // GetEnvelope retrieves the Envelope value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
+func (u PaysharesMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "Envelope" {
@@ -7087,7 +7087,7 @@ func (u StellarMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
 
 // MustGetScpLedgerSeq retrieves the GetScpLedgerSeq value from the union,
 // panicing if the value is not set.
-func (u StellarMessage) MustGetScpLedgerSeq() Uint32 {
+func (u PaysharesMessage) MustGetScpLedgerSeq() Uint32 {
 	val, ok := u.GetGetScpLedgerSeq()
 
 	if !ok {
@@ -7099,7 +7099,7 @@ func (u StellarMessage) MustGetScpLedgerSeq() Uint32 {
 
 // GetGetScpLedgerSeq retrieves the GetScpLedgerSeq value from the union,
 // returning ok if the union's switch indicated the value is valid.
-func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
+func (u PaysharesMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 	armName, _ := u.ArmForSwitch(int32(u.Type))
 
 	if armName == "GetScpLedgerSeq" {
@@ -7115,13 +7115,13 @@ func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 //   struct
 //    {
 //       uint64 sequence;
-//       StellarMessage message;
+//       PaysharesMessage message;
 //       HmacSha256Mac mac;
 //        }
 //
 type AuthenticatedMessageV0 struct {
 	Sequence Uint64
-	Message  StellarMessage
+	Message  PaysharesMessage
 	Mac      HmacSha256Mac
 }
 
@@ -7133,7 +7133,7 @@ type AuthenticatedMessageV0 struct {
 //        struct
 //    {
 //       uint64 sequence;
-//       StellarMessage message;
+//       PaysharesMessage message;
 //       HmacSha256Mac mac;
 //        } v0;
 //    };

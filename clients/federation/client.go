@@ -7,15 +7,15 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/stellar/go/address"
-	proto "github.com/stellar/go/protocols/federation"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/address"
+	proto "github.com/payshares/go/protocols/federation"
+	"github.com/payshares/go/support/errors"
 )
 
-// LookupByAddress performs a federated lookup following to the stellar
+// LookupByAddress performs a federated lookup following to the payshares
 // federation protocol using the "name" type request.  The provided address is
 // used to resolve what server the request should be made against.  NOTE: the
-// "name" type is a legacy holdover from the legacy stellar network's federation
+// "name" type is a legacy holdover from the legacy payshares network's federation
 // protocol. It is unfortunate.
 func (c *Client) LookupByAddress(addy string) (*proto.NameResponse, error) {
 	_, domain, err := address.Split(addy)
@@ -43,8 +43,8 @@ func (c *Client) LookupByAddress(addy string) (*proto.NameResponse, error) {
 	return &resp, nil
 }
 
-// LookupByAccountID performs a federated lookup following to the stellar
-// federation protocol using the "id" type request.  The provided strkey-encoded
+// LookupByAccountID performs a federated lookup following to the payshares
+// federation protocol using the "id" type request.  The provided psrkey-encoded
 // account id is used to resolve what server the request should be made against.
 func (c *Client) LookupByAccountID(aid string) (*proto.IDResponse, error) {
 
@@ -74,13 +74,13 @@ func (c *Client) LookupByAccountID(aid string) (*proto.IDResponse, error) {
 }
 
 func (c *Client) getFederationServer(domain string) (string, error) {
-	stoml, err := c.StellarTOML.GetStellarToml(domain)
+	stoml, err := c.PaysharesTOML.GetPaysharesToml(domain)
 	if err != nil {
-		return "", errors.Wrap(err, "get stellar.toml failed")
+		return "", errors.Wrap(err, "get payshares.toml failed")
 	}
 
 	if stoml.FederationServer == "" {
-		return "", errors.New("stellar.toml is missing federation server info")
+		return "", errors.New("payshares.toml is missing federation server info")
 	}
 
 	if !c.AllowHTTP && !strings.HasPrefix(stoml.FederationServer, "https://") {

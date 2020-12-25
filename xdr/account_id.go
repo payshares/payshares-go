@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/stellar/go/strkey"
+	"github.com/payshares/go/psrkey"
 )
 
-// Address returns the strkey encoded form of this AccountId.  This method will
+// Address returns the psrkey encoded form of this AccountId.  This method will
 // panic if the accountid is backed by a public key of an unknown type.
 func (aid *AccountId) Address() string {
 	if aid == nil {
@@ -19,7 +19,7 @@ func (aid *AccountId) Address() string {
 		ed := aid.MustEd25519()
 		raw := make([]byte, 32)
 		copy(raw, ed[:])
-		return strkey.MustEncode(strkey.VersionByteAccountID, raw)
+		return psrkey.MustEncode(psrkey.VersionByteAccountID, raw)
 	default:
 		panic(fmt.Errorf("Unknown account id type: %v", aid.Type))
 	}
@@ -58,7 +58,7 @@ func (aid *AccountId) SetAddress(address string) error {
 		return nil
 	}
 
-	raw, err := strkey.Decode(strkey.VersionByteAccountID, address)
+	raw, err := psrkey.Decode(psrkey.VersionByteAccountID, address)
 	if err != nil {
 		return err
 	}

@@ -7,9 +7,9 @@ import (
 	"net/url"
 
 	"github.com/pkg/errors"
-	"github.com/stellar/go/address"
-	proto "github.com/stellar/go/protocols/federation"
-	"github.com/stellar/go/support/log"
+	"github.com/payshares/go/address"
+	proto "github.com/payshares/go/protocols/federation"
+	"github.com/payshares/go/support/log"
 )
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -63,7 +63,7 @@ func (h *Handler) lookupByID(w http.ResponseWriter, q string) {
 		return
 	}
 
-	// TODO: validate that `q` is a strkey encoded address
+	// TODO: validate that `q` is a psrkey encoded address
 
 	rec, err := rd.LookupReverseRecord(q)
 	if err != nil {

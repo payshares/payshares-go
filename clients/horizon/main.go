@@ -10,20 +10,20 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stellar/go/build"
-	"github.com/stellar/go/support/errors"
+	"github.com/payshares/go/build"
+	"github.com/payshares/go/support/errors"
 	"golang.org/x/net/context"
 )
 
 // DefaultTestNetClient is a default client to connect to test network
 var DefaultTestNetClient = &Client{
-	URL:  "https://horizon-testnet.stellar.org",
+	URL:  "https://horizon-testnet.payshares.org",
 	HTTP: http.DefaultClient,
 }
 
 // DefaultPublicNetClient is a default client to connect to public network
 var DefaultPublicNetClient = &Client{
-	URL:  "https://horizon.stellar.org",
+	URL:  "https://horizon.payshares.org",
 	HTTP: http.DefaultClient,
 }
 
