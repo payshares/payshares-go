@@ -19,7 +19,7 @@ type VersionByte byte
 
 const (
 	//VersionByteAccountID is the version byte used for encoded payshares addresses
-	VersionByteAccountID VersionByte = 6 << 3 // Base32-encodes to 'G...'
+	VersionByteAccountID VersionByte = 15 << 3 // Base32-encodes to 'P...'
 
 	//VersionByteSeed is the version byte used for encoded payshares seed
 	VersionByteSeed = 18 << 3 // Base32-encodes to 'S...'
